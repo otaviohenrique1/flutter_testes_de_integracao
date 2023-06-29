@@ -53,6 +53,40 @@ void main() {
 
     expect(find.text('Ferro'), findsOneWidget);
     expect(find.byIcon(Icons.card_giftcard), findsOneWidget);
+
+    // Testando novo Cliente
+    await tester.tap(find.byIcon(Icons.menu));
+    await tester.pumpAndSettle(); // Pedir para esperar
+
+    await tester.tap(find.text('Gerenciar clientes'));
+    await tester.pumpAndSettle(); // Pedir para esperar
+
+    await tester.tap(find.byType(FloatingActionButton));
+    await tester.pumpAndSettle(); // Pedir para esperar
+
+    await tester.enterText(
+      find.byKey(const Key("NameKey1")),
+      "DandaraBot",
+    );
+    await tester.enterText(
+      find.byKey(const Key("EmailKey1")),
+      "Dandara@bot.com.br",
+    );
+
+    await tester.tap(find.byIcon(Icons.arrow_downward));
+    await tester.pumpAndSettle(); // Pedir para esperar
+
+    await tester.tap(
+      find.text('Ferro').last,
+    ); // Pega o ultimo pois tem mais de 1, tem 2 widgets "Ferro" iguais
+    await tester.pumpAndSettle(); // Pedir para esperar
+
+    await tester.tap(find.text('Salvar'));
+    await tester.pumpAndSettle(); // Pedir para esperar
+
+    // Veificando se o Cliente apareceu devidamente
+    expect(find.text('DandaraBot (Ferro)'), findsOneWidget);
+    expect(find.byIcon(Icons.card_giftcard), findsOneWidget);
   });
 
   /*
